@@ -18,14 +18,41 @@ player1.name;
 Expected Output: "Player 1"
 
 Describe Space
-Test: "Space object should have a coordinate and know who marked it."
+Test: "Space object should have a coordinate and know who marked it and if it's marked."
 Code:
-let space1 = new Space(coordinate)
-
+let space1 = new Space(0);
+space1.coordinate;
+space1.isMarked;
+space1.markedBy;
+Expected Output: 0, false, "none"
 
 Describe Board
-let space1 = new Space(1);
-let space2 = new Space(2);
-let space3 = new Space(3);
-let space4 = new Space(4);
-let space5 = new Space (5)
+Test: "Board object should have empty object spaces to begin with."
+Code:
+let b = new Board();
+b.spaces;
+Expected Output: empty object {};
+
+Describe Board.prototype.addSpace(space);
+
+Test: "Should add object to object spaces."
+Code:
+b.addSpace(space1);
+b.spaces;
+Expected Output: {1: space object};
+
+Describe: Board.prototype.findSpace()
+
+Test:
+Code:
+Expected Output: 
+Describe: checkWinning()
+
+Test:
+Code:
+Expected Output:
+
+Describe: checkDraw()
+Test:
+Code:
+Expected Output:

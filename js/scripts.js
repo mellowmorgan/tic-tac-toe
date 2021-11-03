@@ -129,13 +129,15 @@ function attachContactListeners(){
       $("#game-status").show();
       $(".box").hide();
       $("#turn").hide();
-      $("img").show();
+      $(".img1").show();
     }
     else if(draw){
       $("#winning-player-or-draw").html("It's a draw");
       $("#game-status").show();
       $(".box").hide();
       $("#turn").hide();
+      $(".img2").show();
+      $(".img1").hide();
     }
     
     else{
