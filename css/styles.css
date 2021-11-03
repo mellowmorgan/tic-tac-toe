@@ -1,9 +1,23 @@
+h1 {
+  text-align: center;
+  font-size: 100px;
+  color: darkgoldenrod;
+  text-shadow: 3px 3px red;
+}
+
+body {
+  background-image: url();
+  background-size: cover;
+}
+
 .box
 {
+  background-color: rgba(250, 0, 0, 0.37);
+  color: rgb(0, 4, 248);
   min-width:10rem;
   min-height:10rem;
-  border: 3px solid #2c3e50;
-  border-radius: 2px;
+  border: 1px inset rgb(0, 25, 250);
+  border-radius: 20px;
   font-family: Helvetica;
   font-weight: bold;
   font-size: 4em;
@@ -11,6 +25,27 @@
   justify-content: center;
   align-items: center;
 }
-/* #game-status{
+
+#game-status{
   display:none;
-} */
+} 
+
+.jumbotron {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 15px;
+  padding: 10px;
+  background-image: url(https://image.shutterstock.com/image-vector/memphis-style-seamless-vector-pattern-260nw-654211720.jpg);
+}
+
+#new-game {
+  margin-top: 25px;
+  font-size: 30px;
+  background-color: black;
+  color: gray;
+  text-shadow: 1px 1px white;
+}
+
+img {
+  display: none;
+}

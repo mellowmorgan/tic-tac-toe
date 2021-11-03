@@ -19,21 +19,31 @@ function Player(name){
 }
 
 function Board(){
-let space1 = new Space(0);
-let space2 = new Space(1);
-let space3 = new Space(2);
-let space4 = new Space(3);
-let space5 = new Space(4);
-let space6 = new Space(5);
-let space7 = new Space(6);
-let space8 = new Space(7);
-let space9 = new Space(8);
+  this.spaces = {};
+  this.currentId = 0;
+}
+
+Board.prototype.assignId = function(){
+  let currentId =this.currentId+1;
+  return currentId;
+}
+Board.prototype.addSpace = function(space){
+  this.currentId = this.assignId();
+  space.id = this.currentId;
+  this.spaces[space.id]= space;
 }
 
 function Space(coordinate){
   this.coordinate = coordinate;
+  this.isMarked = false;
   this.markedBy = "none";
 }
+Board.prototype.findSpace=function(id){
+  if (this.spaces[id] != undefined) {
+    return this.spaces[id];
+  }
+  return false;
+};
 
 
 const winningPatterns = [
@@ -83,25 +93,51 @@ function checkWinning(player){
   });
     return winner;
 }
+function checkDraw(board){
+  let isMarkedCounter=0;
+  let allTheSpaces = board.spaces;
+  Object.keys(allTheSpaces).forEach(function(key){
+    if(allTheSpaces[key].isMarked){
+      isMarkedCounter++;
+    }
+  });
+  if(isMarkedCounter===9){
+    return true;
+  }
+  else{return false;}
+}
 
 function attachContactListeners(){
   let currentPlayer = game.currentPlayer;
+
+  
+  $("#new-game").on("click", function(){
+    window.location.reload();
+  });
   $(".box").on("click",function(){
     $("#"+this.id).html(currentPlayer.markValue);
-      if (game.currentPlayer.name==="Player 1")
-        { game.player1.marks.push(parseInt(this.id));
-          game.currentPlayer=game.player1;
-        }
-      else{
-        game.player2.marks.push(parseInt(this.id));
-        game.currentPlayer=game.player2;
-      }
-    let winner = checkWinning(game.currentPlayer);
-    alert(winner);
+      currentPlayer.marks.push(parseInt(this.id));
+      let space = board.findSpace(parseInt(this.id)+1);
+      space.isMarked=true;
+      space.markedBy=currentPlayer;
+      
+    let winner = checkWinning(currentPlayer);
+    let draw = checkDraw(board);
+    
     if(winner!="none"){
-      $("#winning-player").html(currentPlayer.name);
-    //  $("#game-status").show();
+      $("#winning-player-or-draw").html("The winner is: "+currentPlayer.name);
+      $("#game-status").show();
+      $(".box").hide();
+      $("#turn").hide();
+      $("img").show();
     }
+    else if(draw){
+      $("#winning-player-or-draw").html("It's a draw");
+      $("#game-status").show();
+      $(".box").hide();
+      $("#turn").hide();
+    }
+    
     else{
       if (currentPlayer.name === "Player 1"){
         game.currentPlayer = game.player2;
@@ -115,6 +151,11 @@ function attachContactListeners(){
 }
 
 let game = new Game();
+let board = new Board();
+for (let i=0;i<9;i++){
+  let space = new Space(i);
+  board.addSpace(space);
+}
 $(document).ready(function() {
   $("#player-turn").html(game.currentPlayer.name);
   attachContactListeners(); 
