@@ -1,6 +1,7 @@
 .box
 {
   min-width:10rem;
+  min-height:10rem;
   border: 3px solid #2c3e50;
   border-radius: 2px;
   font-family: Helvetica;

@@ -1,13 +1,21 @@
 function Game(){
   let player1 = new Player("Player 1");
+  this.player1 = player1;
   let player2 = new Player("Player 2");
-  this.currentPlayer = player1;
+  this.player2 = player2;
+  this.currentPlayer = this.player1;
   this.gameOver = false;
 }
 
 function Player(name){
    this.name = name;
    this.marks = [];
+   if (this.name==="Player 1"){
+     this.markValue='X';
+   }
+   else{
+     this.markValue="O";
+   }
 }
 
 function Board(){
@@ -76,5 +84,26 @@ function checkWinning(player){
     return winner;
 }
 
+function attachContactListeners(){
+  let currentPlayer = game.currentPlayer; 
+  $(".box").on("click",function(){
+    $("#"+this.id).html(currentPlayer.markValue);
+   if (currentPlayer.name === "Player 1"){
+     game.currentPlayer = game.player2;
+   } else {
+      game.currentPlayer = game.player1;
+   }
+  $("#player-turn").html(game.currentPlayer.name);
+  currentPlayer = game.currentPlayer; 
+  });
 
-()
+}
+
+let game = new Game();
+$(document).ready(function() {
+  
+  attachContactListeners(); 
+
+});
+
+//BACK FROM LUNCH CHECK FOR WINNER NOW ON CLICK!!!!
