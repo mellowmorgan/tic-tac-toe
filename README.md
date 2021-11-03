@@ -43,16 +43,20 @@ Expected Output: {1: space object};
 
 Describe: Board.prototype.findSpace()
 
-Test:
-Code:
-Expected Output: 
+Test: "Should return Space object in board.spaces by searching by id."
+Code: 
+b.findSpace(1);
+Expected Output: Space object with id 1. 
+
 Describe: checkWinning()
 
-Test:
+Test: "checkWinning(player1)return "none" because no winner yet."
 Code:
-Expected Output:
+checkwinning(player1);
+Expected Output: "none"
 
 Describe: checkDraw()
-Test:
+Test: "checkDraw(b) should return false."
 Code:
-Expected Output:
+checkDraw(b);
+Expected Output: false
