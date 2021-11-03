@@ -7,8 +7,9 @@ function Game(){
 
 function Player(name){
    this.name = name;
-   this.marks = {};
+   this.marks = [];
 }
+
 function Board(){
 let space1 = new Space(0);
 let space2 = new Space(1);
@@ -25,12 +26,55 @@ function Space(coordinate){
   this.coordinate = coordinate;
   this.markedBy = "none";
 }
+playerMarks=[1,2,4,6];
+
+const winningPatterns = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
+
+function checkWinning(player){
+  let playerMarks = player.marks;
+  let hasFirst=false;
+  let hasSecond=false;
+  let hasThird=false;
+  winner="none";
+  //could return either none, player.name, player.name
+  winningPatterns.forEach(function(pattern){
+    const firstEval = pattern[0];
+    playerMarks.forEach(function(element){
+      if (element===firstEval){
+        hasFirst=true;
+      }
+    });
+    const secondEval = pattern[1];
+    playerMarks.forEach(function(element){
+      if (element===secondEval){
+        hasSecond=true;
+      }
+    });
+    const thirdEval = pattern[2];
+    playerMarks.forEach(function(element){
+      if (element===thirdEval){
+        hasThird=true;
+      }
+    });
+    if (hasFirst && hasSecond && hasThird){
+      winner=player.name;
+      return winner;
+    }
+    hasFirst=false;
+    hasSecond=false;
+    hasThird=false;
+  });
+    return winner;
+}
+
 
 ()
-
-when a div clicked
-trigger is Space.markedBy(currentPlayer)
-check something winning
-currentPlayer = 
-if currentPlayer===player  1
-currentplayer=player2
