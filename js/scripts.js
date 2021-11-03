@@ -93,7 +93,7 @@ function attachContactListeners(){
    } else {
       game.currentPlayer = game.player1;
    }
-  $("#player-turn").html(game.currentPlayer.name);
+   $("#player-turn").html(game.currentPlayer.name);
   currentPlayer = game.currentPlayer; 
   });
 
@@ -101,7 +101,7 @@ function attachContactListeners(){
 
 let game = new Game();
 $(document).ready(function() {
-  
+  $("#player-turn").html(game.currentPlayer.name);
   attachContactListeners(); 
 
 });
