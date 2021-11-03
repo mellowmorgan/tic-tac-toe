@@ -34,7 +34,7 @@ function Space(coordinate){
   this.coordinate = coordinate;
   this.markedBy = "none";
 }
-playerMarks=[1,2,4,6];
+
 
 const winningPatterns = [
   [0, 1, 2],
@@ -85,25 +85,39 @@ function checkWinning(player){
 }
 
 function attachContactListeners(){
-  let currentPlayer = game.currentPlayer; 
+  let currentPlayer = game.currentPlayer;
   $(".box").on("click",function(){
     $("#"+this.id).html(currentPlayer.markValue);
-   if (currentPlayer.name === "Player 1"){
-     game.currentPlayer = game.player2;
-   } else {
-      game.currentPlayer = game.player1;
-   }
-   $("#player-turn").html(game.currentPlayer.name);
-  currentPlayer = game.currentPlayer; 
+      if (game.currentPlayer.name==="Player 1")
+        { game.player1.marks.push(parseInt(this.id));
+          game.currentPlayer=game.player1;
+        }
+      else{
+        game.player2.marks.push(parseInt(this.id));
+        game.currentPlayer=game.player2;
+      }
+    let winner = checkWinning(game.currentPlayer);
+    alert(winner);
+    if(winner!="none"){
+      $("#winning-player").html(currentPlayer.name);
+    //  $("#game-status").show();
+    }
+    else{
+      if (currentPlayer.name === "Player 1"){
+        game.currentPlayer = game.player2;
+      } else {
+          game.currentPlayer = game.player1;
+      }
+      $("#player-turn").html(game.currentPlayer.name);
+      currentPlayer = game.currentPlayer; 
+    }
   });
-
 }
 
 let game = new Game();
 $(document).ready(function() {
   $("#player-turn").html(game.currentPlayer.name);
   attachContactListeners(); 
-
 });
 
-//BACK FROM LUNCH CHECK FOR WINNER NOW ON CLICK!!!!
+//BACK FROM LUNCH CHECK FOR WINNER NOW ON CLICK!!!!!!!!!!!!!
