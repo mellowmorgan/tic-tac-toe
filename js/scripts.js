@@ -45,7 +45,6 @@ Board.prototype.findSpace=function(id){
   return false;
 };
 
-
 const winningPatterns = [
   [0, 1, 2],
   [3, 4, 5],
