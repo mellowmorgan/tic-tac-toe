@@ -148,6 +148,7 @@ function attachContactListeners(){
       $("#player-turn").html(game.currentPlayer.name);
       currentPlayer = game.currentPlayer; 
     }
+    $("#"+this.id).off("click");
   });
 }
 
